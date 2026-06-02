@@ -3,6 +3,7 @@ services:
     name: inventory-management-backend
     runtime: python
     rootDir: backend
+    pythonVersion: "3.12.3"
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -11,6 +12,5 @@ services:
       - key: APP_ENV
         value: production
     autoDeploy: true
-    # Only redeploy when files in backend/ change
     paths:
       - backend/**
