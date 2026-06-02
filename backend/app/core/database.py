@@ -15,7 +15,7 @@ _SessionLocal = None
 def _get_engine():
     global _engine
     if _engine is None:
-        _engine = create_engine(settings.database_url)
+        _engine = create_engine(settings.DATABASE_URL)
     return _engine
 
 

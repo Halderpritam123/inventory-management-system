@@ -32,7 +32,8 @@ register_exception_handlers(app)
 
 
 def run_migrations() -> None:
-    config = Config(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "alembic.ini"))
+    alembic_dir = os.path.dirname(os.path.dirname(__file__))
+    config = Config(os.path.join(alembic_dir, "alembic.ini"))
     config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
     command.upgrade(config, "head")
 
