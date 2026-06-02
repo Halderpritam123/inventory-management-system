@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import {
@@ -13,14 +13,29 @@ import { EmptyState } from '@/components/EmptyState'
 import { ErrorState } from '@/components/ErrorState'
 import { useToast } from '@/components/Toast'
 
+const PAGE_SIZE = 5
+
 export default function CustomersPage() {
   const toast = useToast()
   const { data: customers = [], isLoading, isError, refetch } = useGetCustomersQuery()
   const [createCustomer, { isLoading: isCreating }] = useCreateCustomerMutation()
   const [deleteCustomer] = useDeleteCustomerMutation()
+  const [currentPage, setCurrentPage] = useState(1)
 
   const [addOpen, setAddOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
+
+  const pageCount = Math.max(1, Math.ceil(customers.length / PAGE_SIZE))
+  const pagedCustomers = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE
+    return customers.slice(start, start + PAGE_SIZE)
+  }, [customers, currentPage])
+
+  useEffect(() => {
+    if (currentPage > pageCount) {
+      setCurrentPage(pageCount)
+    }
+  }, [currentPage, pageCount])
 
   const handleCreate = async (data) => {
     try {
@@ -68,8 +83,9 @@ export default function CustomersPage() {
       ) : customers.length === 0 ? (
         <EmptyState title="No customers yet" description="Add your first customer to get started." />
       ) : (
-        <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-x-auto">
-          <table className="w-full text-sm">
+        <>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-x-auto">
+            <table className="w-full text-sm">
             <thead className="bg-gray-50 dark:bg-gray-800/50">
               <tr>
                 <th className="px-4 py-3 text-left font-medium text-gray-500 dark:text-gray-400">Name</th>
@@ -79,7 +95,7 @@ export default function CustomersPage() {
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer) => (
+              {pagedCustomers.map((customer) => (
                 <tr key={customer.id} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                   <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">{customer.full_name}</td>
                   <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{customer.email}</td>
@@ -98,6 +114,33 @@ export default function CustomersPage() {
             </tbody>
           </table>
         </div>
+        <div className="flex flex-col gap-2 border-t border-gray-200 dark:border-gray-700 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Showing {pagedCustomers.length} of {customers.length} customers
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+              disabled={currentPage === 1}
+              className="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-xs font-medium transition hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              Page {currentPage} of {pageCount}
+            </span>
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))}
+              disabled={currentPage === pageCount}
+              className="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-xs font-medium transition hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </>
       )}
 
       <Dialog.Root open={addOpen} onOpenChange={setAddOpen}>
