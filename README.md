@@ -362,6 +362,8 @@ npm run dev
 |---|---|---|
 | `VITE_API_URL` | Backend API base URL | `http://localhost:8000` |
 
+> The local file `frontend/.env` is ignored by Git. Copy `frontend/.env.example` and update the URL for your local backend or production backend URL.
+
 ---
 
 ## Docker Setup
@@ -435,10 +437,14 @@ Interactive Swagger UI: `http://localhost:8000/docs`
 
 ### Frontend → Vercel
 
-1. Connect the GitHub repository to Vercel
-2. Set **Root Directory** to `frontend`
-3. Set environment variable: `VITE_API_URL=https://your-backend.render.com`
-4. Deploy
+1. Connect the GitHub repository to Vercel.
+2. Set **Root Directory** to `frontend`.
+3. In Vercel project settings, add the environment variable:
+   - `VITE_API_URL=https://your-backend.render.com`
+4. Add the same variable for both **Preview** and **Production**.
+5. Deploy.
+
+> Do not commit `frontend/.env` to source control. Vercel builds will use the environment variable defined in the project settings.
 
 ### Backend → Render
 
