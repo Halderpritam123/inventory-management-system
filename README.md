@@ -304,8 +304,7 @@ inventory-management-system/
 
 ```bash
 # 1. Clone the repository
-git clone <repo-url>
-cd inventory-management-system
+git clone https://github.com/Halderpritam123/inventory-management-system.git
 
 # 2. Copy and configure environment variables
 cp .env.example .env
@@ -440,7 +439,7 @@ Interactive Swagger UI: `http://localhost:8000/docs`
 1. Connect the GitHub repository to Vercel.
 2. Set **Root Directory** to `frontend`.
 3. In Vercel project settings, add the environment variable:
-   - `VITE_API_URL=https://your-backend.render.com`
+   - `VITE_API_URL=https://inventory-management-system-4-sg8d.onrender.com/
 4. Add the same variable for both **Preview** and **Production**.
 5. Deploy.
 
@@ -509,21 +508,24 @@ The only coupling to resolve is `orders/service.py` reading the products reposit
 
 | Item | URL |
 |---|---|
-| GitHub Repository | `<!-- TODO: Add GitHub Repo URL -->` |
-| Docker Hub Backend Image | `<!-- TODO: Add Docker Hub Image URL -->` |
-| Frontend Live URL | `<!-- TODO: Add Vercel Frontend URL -->` |
-| Backend Live URL | `<!-- TODO: Add Render Backend URL -->` |
+| GitHub Repository | `https://github.com/Halderpritam123/inventory-management-system.git` |
+| Docker Hub Backend Image | `https://hub.docker.com/repository/docker/phritamdev/inventory-backend/general` |
+| Frontend Live URL | `https://inventory-management-system-three-kohl.vercel.app/` |
+| Backend Live URL | `https://inventory-management-system-4-sg8d.onrender.com/docs` |
 
 ---
 
 ## Screenshots
 
-> Add screenshots here after deployment.
-
 | Page | Screenshot |
 |---|---|
-| Dashboard | `<!-- TODO: Add screenshot -->` |
-| Products | `<!-- TODO: Add screenshot -->` |
-| Customers | `<!-- TODO: Add screenshot -->` |
-| Orders | `<!-- TODO: Add screenshot -->` |
-| Order Details | `<!-- TODO: Add screenshot -->` |
+| Dashboard | `<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/31bc1aa2-b4c9-4471-94d7-d3f13e711d8b" />
+` |
+| Products | `<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e3df4168-1df3-40c8-b386-83b636e1ad84" />
+` |
+| Customers | `<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1ef4736b-b3a2-48b8-9296-e88502424e24" />
+` |
+| Orders | `<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/12827f55-e97e-422d-b8ab-555254853160" />
+` |
+| Order Details | `<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e4510166-2051-46ae-aa05-34cfd644664c" />
+` |
