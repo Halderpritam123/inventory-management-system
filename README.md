@@ -435,11 +435,11 @@ Interactive Swagger UI: `http://localhost:8000/docs`
 ## Deployment Guide
 
 ### Frontend → Vercel
-
+ Deployed app url:https://inventory-management-system-beta-gules.vercel.app/
 1. Connect the GitHub repository to Vercel.
 2. Set **Root Directory** to `frontend`.
 3. In Vercel project settings, add the environment variable:
-   - `VITE_API_URL=https://inventory-management-system-4-sg8d.onrender.com/
+   - `VITE_API_URL=https://inventory-management-system-kgrd.onrender.com
 4. Add the same variable for both **Preview** and **Production**.
 5. Deploy.
 
