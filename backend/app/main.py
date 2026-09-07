@@ -40,8 +40,7 @@ def run_migrations() -> None:
 
 @app.on_event("startup")
 async def startup_event() -> None:
-    if settings.APP_ENV != "test":
-        run_migrations()
+    run_migrations()
 
 
 app.include_router(products_router)
